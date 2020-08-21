@@ -20,15 +20,12 @@ mongoose.connect(MONGO_URI, {useNewUrlParser:true, useUnifiedTopology:true, useF
 
 
 app.use(express.json())
+    .use(express.static(__dirname+'/static'))
     .use(cors())
     .use(morgan('dev'));
 
-app.get('/', (req, res)=>{
-    res.send({message:"API de Juegos"});
-});
 app.use('/api',GamesRoutes)
     .use(NotFoundMiddleware);
 
-console.log(PORT)
 
 app.listen(PORT, ()=>{console.log('Funcionando')});
